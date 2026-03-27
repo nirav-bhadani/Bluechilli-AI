@@ -2,8 +2,19 @@ import { useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
 import { Mail, Phone, MapPin, ArrowUpRight, Linkedin, Instagram, Facebook, Youtube, Twitter, MessageCircle, Zap } from "lucide-react";
 import logo from "../assets/logo.svg";
+import { toast } from "@/components/ui/sonner";
+import { submitEnquiry } from "@/lib/enquiry";
+
+const newsletterSchema = z.object({
+  email: z.string().trim().email("Please enter a valid email address"),
+});
+
+type NewsletterFormValues = z.infer<typeof newsletterSchema>;
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -53,6 +64,17 @@ const Footer = () => {
   const footerRef  = useRef<HTMLElement>(null);
   const ctaBandRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors, isSubmitting },
+  } = useForm<NewsletterFormValues>({
+    resolver: zodResolver(newsletterSchema),
+    defaultValues: {
+      email: "",
+    },
+  });
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -77,6 +99,24 @@ const Footer = () => {
     }, footerRef);
     return () => ctx.revert();
   }, []);
+
+  const onNewsletterSubmit = async (values: NewsletterFormValues) => {
+    try {
+      await submitEnquiry({
+        subject: "New Newsletter Enquiry - Bluechilli AI",
+        source: "Footer newsletter",
+        name: "Newsletter subscriber",
+        email: values.email,
+        message: `Please add ${values.email} to the Bluechilli AI newsletter list.`,
+      });
+
+      toast.success("Thanks, your email was submitted.");
+      reset();
+    } catch (error) {
+      const message = error instanceof Error ? error.message : "Could not submit right now. Please try again.";
+      toast.error(message);
+    }
+  };
 
   return (
     <footer ref={footerRef} className="relative overflow-hidden bg-[#030308]">
@@ -221,19 +261,23 @@ const Footer = () => {
             {/* newsletter */}
             <div className="pt-2">
               <p className="text-sm font-bold uppercase tracking-widest text-white/45 mb-3">Newsletter</p>
-              <form onSubmit={(e) => e.preventDefault()} className="flex gap-2">
+              <form onSubmit={handleSubmit(onNewsletterSubmit)} noValidate className="flex gap-2">
                 <input
                   type="email"
+                  {...register("email")}
                   placeholder="your@email.com"
                   className="flex-1 min-w-0 rounded-xl bg-white/[0.05] border border-white/[0.08] px-3 py-2.5 text-base text-white placeholder:text-white/40 focus:outline-none focus:border-[#E6007E]/40 transition-colors"
+                  aria-invalid={Boolean(errors.email)}
                 />
                 <button
                   type="submit"
+                  disabled={isSubmitting}
                   className="shrink-0 btn-gradient px-4 py-2.5 rounded-xl text-base font-semibold hover:scale-[1.04] transition-all duration-200"
                 >
-                  Send
+                  {isSubmitting ? "Sending..." : "Send"}
                 </button>
               </form>
+              {errors.email ? <p className="mt-2 text-sm text-red-300">{errors.email.message}</p> : null}
             </div>
           </div>
 

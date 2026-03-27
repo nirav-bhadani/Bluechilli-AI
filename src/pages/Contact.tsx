@@ -1,12 +1,43 @@
-import { useState } from "react";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { Send, MessageCircle, Mail, Users, CreditCard, Phone, MapPin } from "lucide-react";
 import { motion } from "framer-motion";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
+import { toast } from "@/components/ui/sonner";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import AnimatedSection from "../components/AnimatedSection";
+import { submitEnquiry } from "@/lib/enquiry";
+
+const contactSchema = z.object({
+  name: z.string().trim().min(2, "Please enter your full name"),
+  email: z.string().trim().email("Please enter a valid email address"),
+  phone: z
+    .string()
+    .trim()
+    .min(7, "Please enter a valid phone number")
+    .max(25, "Phone number is too long")
+    .regex(/^[0-9+()\-\s]+$/, "Use only numbers and phone symbols"),
+  message: z.string().trim().min(20, "Please enter at least 20 characters"),
+});
+
+type ContactFormValues = z.infer<typeof contactSchema>;
 
 const Contact = () => {
-  const [form, setForm] = useState({ name: "", email: "", phone: "", message: "" });
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors, isSubmitting },
+  } = useForm<ContactFormValues>({
+    resolver: zodResolver(contactSchema),
+    defaultValues: {
+      name: "",
+      email: "",
+      phone: "",
+      message: "",
+    },
+  });
 
   const departments = [
     {
@@ -35,9 +66,23 @@ const Contact = () => {
     },
   ];
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    // Handle form submission
+  const onSubmit = async (values: ContactFormValues) => {
+    try {
+      await submitEnquiry({
+        subject: "New Contact Form Enquiry - Bluechilli AI",
+        source: "Contact page",
+        name: values.name,
+        email: values.email,
+        phone: values.phone,
+        message: values.message,
+      });
+
+      toast.success("Thanks, your enquiry has been sent.");
+      reset();
+    } catch (error) {
+      const message = error instanceof Error ? error.message : "Could not send your enquiry right now. Please try again.";
+      toast.error(message);
+    }
   };
 
   return (
@@ -183,54 +228,59 @@ const Contact = () => {
                   <h2 className="font-display text-3xl md:text-4xl font-bold text-white/95 mb-2">Send us a Message</h2>
                   <p className="text-white/60 mb-8">Fill out the form below and we'll get back to you within 24 hours</p>
 
-                  <form onSubmit={handleSubmit} className="space-y-5">
+                  <form onSubmit={handleSubmit(onSubmit)} noValidate className="space-y-5">
                     <div className="grid md:grid-cols-2 gap-5">
                       <div>
                         <label className="text-sm font-medium text-white/75 mb-2.5 block">Full Name</label>
                         <input
                           type="text"
-                          value={form.name}
-                          onChange={(e) => setForm({ ...form, name: e.target.value })}
+                          {...register("name")}
                           className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder:text-white/40 focus:outline-none focus-visible:border-white/35 focus-visible:bg-white/[0.07] focus-visible:ring-2 focus-visible:ring-white/10 transition-[border-color,box-shadow,background-color] duration-200 ease-out"
                           placeholder="Your name"
+                          aria-invalid={Boolean(errors.name)}
                         />
+                        {errors.name ? <p className="mt-2 text-sm text-red-300">{errors.name.message}</p> : null}
                       </div>
                       <div>
                         <label className="text-sm font-medium text-white/75 mb-2.5 block">Email Address</label>
                         <input
                           type="email"
-                          value={form.email}
-                          onChange={(e) => setForm({ ...form, email: e.target.value })}
+                          {...register("email")}
                           className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder:text-white/40 focus:outline-none focus-visible:border-white/35 focus-visible:bg-white/[0.07] focus-visible:ring-2 focus-visible:ring-white/10 transition-[border-color,box-shadow,background-color] duration-200 ease-out"
                           placeholder="your@email.com"
+                          aria-invalid={Boolean(errors.email)}
                         />
+                        {errors.email ? <p className="mt-2 text-sm text-red-300">{errors.email.message}</p> : null}
                       </div>
                     </div>
                     <div>
                       <label className="text-sm font-medium text-white/75 mb-2.5 block">Phone Number</label>
                       <input
                         type="tel"
-                        value={form.phone}
-                        onChange={(e) => setForm({ ...form, phone: e.target.value })}
+                        {...register("phone")}
                         className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder:text-white/40 focus:outline-none focus-visible:border-white/35 focus-visible:bg-white/[0.07] focus-visible:ring-2 focus-visible:ring-white/10 transition-[border-color,box-shadow,background-color] duration-200 ease-out"
                         placeholder="+44 (0) 121 359 1384"
+                        aria-invalid={Boolean(errors.phone)}
                       />
+                      {errors.phone ? <p className="mt-2 text-sm text-red-300">{errors.phone.message}</p> : null}
                     </div>
                     <div>
                       <label className="text-sm font-medium text-white/75 mb-2.5 block">Message</label>
                       <textarea
-                        value={form.message}
-                        onChange={(e) => setForm({ ...form, message: e.target.value })}
+                        {...register("message")}
                         rows={5}
                         className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder:text-white/40 focus:outline-none focus-visible:border-white/35 focus-visible:bg-white/[0.07] focus-visible:ring-2 focus-visible:ring-white/10 transition-[border-color,box-shadow,background-color] duration-200 ease-out resize-none"
                         placeholder="Tell us about your business and what you're looking to achieve..."
+                        aria-invalid={Boolean(errors.message)}
                       />
+                      {errors.message ? <p className="mt-2 text-sm text-red-300">{errors.message.message}</p> : null}
                     </div>
                     <button
                       type="submit"
+                      disabled={isSubmitting}
                       className="w-full btn-gradient rounded-xl py-3.5 text-base font-medium inline-flex items-center justify-center gap-2 transition-all hover:scale-[1.02] active:scale-[0.98]"
                     >
-                      Send Message <Send size={18} />
+                      {isSubmitting ? "Sending..." : "Send Message"} <Send size={18} />
                     </button>
                   </form>
                 </div>
