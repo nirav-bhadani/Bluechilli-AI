@@ -537,7 +537,7 @@ const Examples = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.12 }}
-              className="text-lg text-center mx-auto text-muted-foreground max-w-2xl leading-relaxed mb-10"
+              className="text-lg text-center mx-auto text-muted-foreground max-w-2xl leading-relaxed"
             >
               Explore how WhatsApp AI chatbots transform customer journeys
               across industries. From travel bookings to PPC support, discover
@@ -545,7 +545,7 @@ const Examples = () => {
             </motion.p>
 
             {/* Stats */}
-            <motion.div
+            {/* <motion.div
               initial={{ opacity: 0, y: 16 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -569,7 +569,7 @@ const Examples = () => {
                   </p>
                 </div>
               ))}
-            </motion.div>
+            </motion.div> */}
           </div>
 
           {/* ── Filter Tabs ── */}
