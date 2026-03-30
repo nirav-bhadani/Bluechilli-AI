@@ -1,5 +1,5 @@
-import { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { useState, useEffect, useRef } from "react";
+import { motion, AnimatePresence, useInView } from "framer-motion";
 import AnimatedSection from "../AnimatedSection";
 
 const conversation = [
@@ -13,18 +13,18 @@ const conversation = [
 
 const ChatDemo = () => {
   const [visibleCount, setVisibleCount] = useState(0);
+  const containerRef = useRef(null);
+  const isInView = useInView(containerRef, { once: true, margin: "-100px" });
 
   useEffect(() => {
-    if (visibleCount < conversation.length) {
+    if (isInView && visibleCount < conversation.length) {
       const timer = setTimeout(() => setVisibleCount((c) => c + 1), 1200);
       return () => clearTimeout(timer);
     }
-    const reset = setTimeout(() => setVisibleCount(0), 4000);
-    return () => clearTimeout(reset);
-  }, [visibleCount]);
+  }, [visibleCount, isInView]);
 
   return (
-    <section className="section-spacing">
+    <section className="section-spacing" ref={containerRef}>
       <div className="container mx-auto px-6">
         <AnimatedSection className="text-center mb-16">
           <h2 className="font-display text-3xl md:text-5xl font-bold mb-4">
