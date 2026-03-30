@@ -652,12 +652,17 @@ const Examples = () => {
                       {study.sections.map((section, idx) => (
                         <motion.button
                           key={section.title}
-                          onClick={() =>
+                          onClick={() => {
                             setActiveSectionIndex({
                               ...activeSectionIndex,
                               [study.id]: idx,
-                            })
-                          }
+                            });
+                            if (window.innerWidth < 1024) {
+                              document
+                                .getElementById(`section-content-${study.id}`)
+                                ?.scrollIntoView({ behavior: "smooth" });
+                            }
+                          }}
                           initial={{ opacity: 0, scale: 0.95 }}
                           whileInView={{ opacity: 1, scale: 1 }}
                           viewport={{ once: true }}
@@ -714,11 +719,12 @@ const Examples = () => {
 
                     {/* Active Section Card */}
                     <motion.article
+                      id={`section-content-${study.id}`}
                       key={`section-${study.id}-${activeSectionIndex[study.id as keyof typeof activeSectionIndex]}`}
                       initial={{ opacity: 0, y: 12 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ duration: 0.35 }}
-                      className="group relative overflow-hidden rounded-2xl border bg-[linear-gradient(170deg,rgba(255,255,255,0.06),rgba(255,255,255,0.02))] p-6 md:p-8"
+                      className="group relative overflow-hidden rounded-2xl border bg-[linear-gradient(170deg,rgba(255,255,255,0.06),rgba(255,255,255,0.02))] p-6 md:p-8 scroll-mt-24"
                       style={
                         {
                           borderColor: `${study.accentColor}40`,

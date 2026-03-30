@@ -180,6 +180,11 @@ const FAQ = () => {
                     onClick={() => {
                       setActiveCategory(category.id);
                       setOpen(null);
+                      if (window.innerWidth < 1024) {
+                        document
+                          .getElementById("faq-content")
+                          ?.scrollIntoView({ behavior: "smooth" });
+                      }
                     }}
                     initial={{ opacity: 0, y: 16 }}
                     whileInView={{ opacity: 1, y: 0 }}
@@ -273,11 +278,12 @@ const FAQ = () => {
           {/* Active Category FAQs */}
           {activeData && (
             <motion.div
+              id="faq-content"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5 }}
-              className="space-y-3 md:space-y-4"
+              className="space-y-3 md:space-y-4 scroll-mt-24"
             >
               <div className="flex items-center gap-3 mb-6 md:mb-8">
                 <div
