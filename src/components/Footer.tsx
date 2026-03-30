@@ -5,8 +5,9 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-import { Mail, Phone, MapPin, ArrowUpRight, Linkedin, Instagram, Facebook, Youtube, Twitter, MessageCircle, Zap } from "lucide-react";
+import { Mail, ArrowUpRight, Linkedin, Instagram, Facebook, Youtube, Twitter, MessageCircle, Zap } from "lucide-react";
 import logo from "../assets/logo.svg";
+import whatsappQrImage from "../assets/Blu_whatsapp_qr.png";
 import { toast } from "@/components/ui/sonner";
 import { submitEnquiry } from "@/lib/enquiry";
 
@@ -57,8 +58,6 @@ const stats = [
   { value: "94%",   label: "Satisfaction" },
   { value: "1-day", label: "Setup" },
 ];
-
-const whatsappQrUrl = "https://www.bluechilli.ai/assets/images/whatsapp-qr.png";
 
 const Footer = () => {
   const footerRef  = useRef<HTMLElement>(null);
@@ -175,7 +174,7 @@ const Footer = () => {
                   <div className="flex flex-col md:flex-row items-center gap-3">
                     <div className="rounded-2xl bg-white shadow-[0_10px_24px_rgba(0,0,0,0.18)]">
                       <img
-                        src={whatsappQrUrl}
+                        src={whatsappQrImage}
                         alt="Bluechilli WhatsApp QR code"
                         className="h-20 w-20 rounded-lg object-contain"
                       />
@@ -242,20 +241,6 @@ const Footer = () => {
                 hello@bluechilli.ai
                 <ArrowUpRight size={11} className="opacity-0 group-hover:opacity-100 transition-opacity ml-auto" />
               </a>
-              <a href="tel:01213591384"
-                className="group flex items-center gap-2.5 text-base text-white/65 hover:text-white transition-colors duration-200">
-                <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-sky-500/15 border border-sky-500/20">
-                  <Phone size={12} className="text-sky-400" />
-                </span>
-                0121 359 1384
-                <ArrowUpRight size={11} className="opacity-0 group-hover:opacity-100 transition-opacity ml-auto" />
-              </a>
-              <div className="flex items-start gap-2.5 text-base text-white/55">
-                <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-[#E6007E]/10 border border-[#E6007E]/20 mt-0.5">
-                  <MapPin size={12} className="text-[#E6007E]" />
-                </span>
-                Unit 2, Avenue Terrace, Avenue Road,<br />Aston, Birmingham B6 4DY
-              </div>
             </div>
 
             {/* newsletter */}

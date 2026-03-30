@@ -1,5 +1,5 @@
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Send, MessageCircle, Mail, Users, CreditCard, Phone, MapPin } from "lucide-react";
+import { Send, MessageCircle, Mail, Users, CreditCard } from "lucide-react";
 import { motion } from "framer-motion";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -122,36 +122,12 @@ const Contact = () => {
                     <p className="text-white/60 text-sm md:text-base">Multiple ways to reach our team</p>
                   </div>
 
-                  {/* Phone Card */}
-                  <motion.div
-                    initial={{ opacity: 0, y: 12 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.4 }}
-                    className="group relative rounded-2xl border bg-[linear-gradient(145deg,rgba(59,130,246,0.1),rgba(59,130,246,0.05))] p-6 overflow-hidden transition-all hover:-translate-y-1"
-                  >
-                    {/* Glow on hover */}
-                    <div className="pointer-events-none absolute -inset-20 rounded-full blur-2xl opacity-0 group-hover:opacity-20 transition-opacity bg-blue-500" />
-                    
-                    <div className="relative z-10 flex items-start gap-4">
-                      <div className="h-12 w-12 rounded-lg bg-blue-500/30 flex items-center justify-center shrink-0">
-                        <Phone size={22} className="text-blue-400" />
-                      </div>
-                      <div className="flex-1 min-w-0">
-                        <p className="text-sm font-semibold text-white/75 mb-2">Phone</p>
-                        <a href="tel:01213591384" className="font-display text-lg font-bold text-white/90 hover:text-blue-400 transition-colors break-all">
-                          0121 359 1384
-                        </a>
-                      </div>
-                    </div>
-                  </motion.div>
-
                   {/* WhatsApp Card */}
                   <motion.div
                     initial={{ opacity: 0, y: 12 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
-                    transition={{ duration: 0.4, delay: 0.08 }}
+                    transition={{ duration: 0.4 }}
                     className="group relative rounded-2xl border bg-[linear-gradient(145deg,rgba(16,185,129,0.1),rgba(16,185,129,0.05))] p-6 overflow-hidden transition-all hover:-translate-y-1"
                   >
                     {/* Glow on hover */}
@@ -176,7 +152,7 @@ const Contact = () => {
                     initial={{ opacity: 0, y: 12 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
-                    transition={{ duration: 0.4, delay: 0.16 }}
+                    transition={{ duration: 0.4, delay: 0.08 }}
                     className="group relative rounded-2xl border bg-[linear-gradient(145deg,rgba(139,92,246,0.1),rgba(139,92,246,0.05))] p-6 overflow-hidden transition-all hover:-translate-y-1"
                   >
                     {/* Glow on hover */}
@@ -195,29 +171,6 @@ const Contact = () => {
                     </div>
                   </motion.div>
 
-                  {/* Address Card */}
-                  <motion.div
-                    initial={{ opacity: 0, y: 12 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.4, delay: 0.24 }}
-                    className="group relative rounded-2xl border bg-[linear-gradient(145deg,rgba(245,158,11,0.1),rgba(245,158,11,0.05))] p-6 overflow-hidden transition-all hover:-translate-y-1"
-                  >
-                    {/* Glow on hover */}
-                    <div className="pointer-events-none absolute -inset-20 rounded-full blur-2xl opacity-0 group-hover:opacity-20 transition-opacity bg-amber-500" />
-                    
-                    <div className="relative z-10 flex items-start gap-4">
-                      <div className="h-12 w-12 rounded-lg bg-amber-500/30 flex items-center justify-center shrink-0">
-                        <MapPin size={22} className="text-amber-400" />
-                      </div>
-                      <div className="flex-1 min-w-0">
-                        <p className="text-sm font-semibold text-white/75 mb-2">Office</p>
-                        <p className="font-display font-bold text-white/90 text-sm leading-relaxed">
-                          Unit 2, Avenue Terrace, Avenue Road, Aston, Birmingham B6 4DY
-                        </p>
-                      </div>
-                    </div>
-                  </motion.div>
                 </div>
 
                 {/* Divider */}
@@ -259,7 +212,7 @@ const Contact = () => {
                         type="tel"
                         {...register("phone")}
                         className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder:text-white/40 focus:outline-none focus-visible:border-white/35 focus-visible:bg-white/[0.07] focus-visible:ring-2 focus-visible:ring-white/10 transition-[border-color,box-shadow,background-color] duration-200 ease-out"
-                        placeholder="+44 (0) 121 359 1384"
+                        placeholder="Your phone number"
                         aria-invalid={Boolean(errors.phone)}
                       />
                       {errors.phone ? <p className="mt-2 text-sm text-red-300">{errors.phone.message}</p> : null}

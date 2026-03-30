@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
+import whatsappQrImage from "../../assets/Blu_whatsapp_qr.png";
 
 const chatMessages = [
   { from: "user", text: "Hi, I want to order a large pepperoni pizza 🍕" },
@@ -8,8 +9,6 @@ const chatMessages = [
   { from: "user", text: "Add a Coke and garlic bread" },
   { from: "bot", text: "Perfect! Your total is $24.99. Shall I confirm the order for delivery?" },
 ];
-
-const whatsappQrUrl = "https://www.bluechilli.ai/assets/images/whatsapp-qr.png";
 
 const HeroSection = () => (
   <section className="relative min-h-screen flex items-center overflow-hidden pt-20">
@@ -77,7 +76,7 @@ const HeroSection = () => (
             className="absolute -top-2 -md:top-4 right-5 -md:right-4 z-20 glass rounded-xl p-5 glow-sm"
           >
             <img
-              src={whatsappQrUrl}
+              src={whatsappQrImage}
               alt="Bluechilli WhatsApp QR code"
               className="h-16 w-16 rounded-md object-contain"
             />

@@ -155,12 +155,7 @@ const PrivacyPolicy = () => {
                 <p>
                   <span className="font-semibold text-white">Email:</span> hello@bluechilli.ai
                 </p>
-                <p>
-                  <span className="font-semibold text-white">Phone:</span> 0121 359 1384
-                </p>
-                <p>
-                  <span className="font-semibold text-white">Address:</span> Unit 2, Avenue Terrace, Avenue Road, Aston, Birmingham B6 4DY
-                </p>
+               
               </div>
             </AnimatedSection>
           </div>
