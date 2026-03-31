@@ -1,8 +1,12 @@
 import { motion } from "framer-motion";
 import { MessageCircle, Lock, Zap, Database, Brain, Send, CheckCircle2 } from "lucide-react";
 import { useRef } from "react";
+import { Link } from "react-router-dom";
+import { ArrowRight, HelpCircle } from "lucide-react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
+import SEO from "../components/SEO";
+import BreadcrumbSchema from "../components/BreadcrumbSchema";
 import AnimatedSection from "../components/AnimatedSection";
 
 const steps = [
@@ -97,6 +101,32 @@ const HowItWorks = () => {
 
   return (
     <div className="min-h-screen bg-dark-deep overflow-x-hidden">
+      <SEO 
+        title="How Our WhatsApp AI Chatbot Works | Bluechilli AI"
+        description="Discover how Bluechilli’s WhatsApp AI chatbots process messages, integrate with your business systems, and respond instantly. Simple setup, powerful results."
+        canonical="https://www.bluechilli.ai/how-it-works"
+      />
+      <script type="application/ld+json">
+        {JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "HowTo",
+          "name": "How Bluechilli’s WhatsApp AI Chatbot Works",
+          "description": "A step-by-step guide on how Bluechilli AI builds and deploys WhatsApp chatbots.",
+          "step": steps.map((step, idx) => ({
+            "@type": "HowToStep",
+            "position": idx + 1,
+            "name": step.title,
+            "itemListElement": step.features.map(f => ({
+              "@type": "HowToDirection",
+              "text": f
+            }))
+          }))
+        })}
+      </script>
+      <BreadcrumbSchema items={[
+        { name: "Home", item: "/" },
+        { name: "How It Works", item: "/how-it-works" }
+      ]} />
       <Navbar />
 
       <main className="relative pt-28 md:pt-32 pb-24">
@@ -115,7 +145,7 @@ const HowItWorks = () => {
               transition={{ duration: 0.6, delay: 0.08 }}
               className="max-w-4xl mx-auto text-center font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-[1.15] mb-8"
             >
-              How It <span className="gradient-text">Works</span>
+              How Bluechilli’s WhatsApp AI <span className="gradient-text">Chatbot Works</span>
             </motion.h1>
 
             {/* Subtitle */}
@@ -189,9 +219,9 @@ const HowItWorks = () => {
                             style={{ background: `${step.color}44` }}
                           />
                         </div>
-                        <h4 className="text-md font-semibold text-white/90 leading-tight truncate">
+                        <h2 className="text-md font-semibold text-white/90 leading-tight truncate">
                           {step.title}
-                        </h4>
+                        </h2>
                       </div>
                     </div>
                   </motion.button>
@@ -263,9 +293,9 @@ const HowItWorks = () => {
                               style={{ background: `${step.color}44` }}
                             />
                           </div>
-                          <h3 className="font-display text-lg md:text-xl lg:text-2xl font-bold text-white/95">
+                          <h2 className="font-display text-lg md:text-xl lg:text-2xl font-bold text-white/95">
                             {step.title}
-                          </h3>
+                          </h2>
                         </div>
                       </div>
 
@@ -307,6 +337,47 @@ const HowItWorks = () => {
           </div>
         </section>
       </main>
+
+      {/* Next Steps CTA */}
+      <section className="pb-24 pt-12 overflow-hidden">
+        <div className="container mx-auto px-4 text-center">
+          <AnimatedSection>
+            <div className="grid md:grid-cols-2 gap-6 max-w-5xl mx-auto">
+              <div className="glass rounded-3xl p-8 md:p-10 border-white/10 group hover:border-[#E6007E]/30 transition-all text-left">
+                <div className="h-12 w-12 rounded-xl bg-[#E6007E]/20 flex items-center justify-center mb-6 text-[#E6007E]">
+                  <HelpCircle size={24} />
+                </div>
+                <h2 className="font-display text-2xl font-bold mb-3">Have more questions?</h2>
+                <p className="text-white/60 mb-8 leading-relaxed">
+                  Learn more about security, integration details, and model performance in our comprehensive FAQ.
+                </p>
+                <Link 
+                  to="/faq"
+                  className="btn-gradient px-8 py-4 rounded-xl font-semibold inline-flex items-center justify-center gap-2"
+                >
+                  Visit the FAQ <ArrowRight size={18} />
+                </Link>
+              </div>
+
+              <div className="glass rounded-3xl p-8 md:p-10 border-white/10 group hover:border-neon-blue/30 transition-all text-left">
+                <div className="h-12 w-12 rounded-xl bg-neon-blue/20 flex items-center justify-center mb-6 text-neon-blue">
+                  <Send size={24} />
+                </div>
+                <h2 className="font-display text-2xl font-bold mb-3">Ready to transform your business?</h2>
+                <p className="text-white/60 mb-8 leading-relaxed">
+                  Get a bespoke demo tailored to your specific workflows and brand requirements today.
+                </p>
+                <Link 
+                  to="/contact"
+                  className="btn-gradient px-8 py-4 rounded-xl font-semibold inline-flex items-center justify-center gap-2"
+                >
+                  Get Started <ArrowRight size={20} />
+                </Link>
+              </div>
+            </div>
+          </AnimatedSection>
+        </div>
+      </section>
 
       <Footer />
     </div>

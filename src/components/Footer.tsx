@@ -186,7 +186,7 @@ const Footer = () => {
               <div className="text-center md:text-left max-w-lg">
                 <img
                   src={logo}
-                  alt="Bluechilli AI"
+                  alt="Bluechilli AI - WhatsApp AI Chatbots That Feel Human"
                   className="h-10 w-auto mx-auto md:mx-0 mb-6"
                 />
                 <h2 className="font-display text-3xl md:text-4xl font-bold text-white leading-tight mb-3">
@@ -222,7 +222,7 @@ const Footer = () => {
                     <div className="rounded-2xl bg-white shadow-[0_10px_24px_rgba(0,0,0,0.18)]">
                       <img
                         src={whatsappQrImage}
-                        alt="Bluechilli WhatsApp QR code"
+                        alt="Scan Bluechilli WhatsApp QR code to start a live AI chatbot conversation"
                         className="h-20 w-20 rounded-lg object-contain"
                       />
                     </div>

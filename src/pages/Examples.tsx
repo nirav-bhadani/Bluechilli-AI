@@ -1,9 +1,12 @@
 import { useState } from "react";
 import type { CSSProperties, ReactNode } from "react";
 import { motion } from "framer-motion";
-import { CheckCircle2, MessageCircle, SendHorizontal, Sparkles } from "lucide-react";
+import { Link } from "react-router-dom";
+import { CheckCircle2, MessageCircle, SendHorizontal, Sparkles, ArrowRight } from "lucide-react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
+import SEO from "../components/SEO";
+import BreadcrumbSchema from "../components/BreadcrumbSchema";
 import AnimatedSection from "../components/AnimatedSection";
 
 // ── Types ──────────────────────────────────────────────────────────────────────
@@ -510,6 +513,25 @@ const Examples = () => {
 
   return (
     <div className="min-h-screen bg-dark-deep overflow-x-hidden">
+      <SEO 
+        title="WhatsApp AI Chatbot Examples & Case Studies | Bluechilli AI"
+        description="See how businesses use Bluechilli’s WhatsApp AI chatbots to automate bookings, support, and sales. Real case studies from travel, PPC, and more."
+        canonical="https://www.bluechilli.ai/examples"
+        ogType="article"
+      />
+      <script type="application/ld+json">
+        {JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "CollectionPage",
+          "name": "WhatsApp AI Chatbot Examples & Case Studies",
+          "description": "A collection of real-world case studies showing how Bluechilli AI helps businesses automate their WhatsApp communications.",
+          "url": "https://www.bluechilli.ai/examples"
+        })}
+      </script>
+      <BreadcrumbSchema items={[
+        { name: "Home", item: "/" },
+        { name: "Examples", item: "/examples" }
+      ]} />
       <Navbar />
 
       <main className="relative pt-28 md:pt-32 pb-24">
@@ -528,7 +550,8 @@ const Examples = () => {
               transition={{ duration: 0.6, delay: 0.08 }}
               className="max-w-5xl mx-auto text-center font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-[1.15] mb-8"
             >
-              Real <span className="gradient-text">Examples</span>
+              WhatsApp AI Chatbot Examples: <br />
+              <span className="gradient-text">Real Business Case Studies</span>
             </motion.h1>
 
             {/* Subtitle */}
@@ -814,6 +837,26 @@ const Examples = () => {
           </div>
         </section>
       </main>
+
+      {/* Bottom CTA to How It Works */}
+      <section className="pb-24 pt-12">
+        <div className="container mx-auto px-4 text-center">
+          <AnimatedSection>
+            <div className="glass rounded-3xl p-8 md:p-12 max-w-4xl mx-auto border-white/10">
+              <h2 className="font-display text-3xl font-bold mb-4">Curious about our process?</h2>
+              <p className="text-white/60 mb-8 max-w-2xl mx-auto">
+                See exactly how we build, train, and deploy your custom WhatsApp AI chatbot from start to finish.
+              </p>
+              <Link 
+                to="/how-it-works"
+                className="btn-gradient px-8 py-4 rounded-xl font-semibold inline-flex items-center gap-2"
+              >
+                See How It Works <ArrowRight size={20} />
+              </Link>
+            </div>
+          </AnimatedSection>
+        </div>
+      </section>
 
       <Footer />
     </div>

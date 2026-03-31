@@ -100,10 +100,10 @@ const HeroSection = () => (
           transition={{ duration: 0.8 }}
         >
           <h1 className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-[1.1] mb-6">
-            AI Chatbots That <br />
-            Feel <span className="text-foreground">Human</span>
+            WhatsApp AI Chatbots <br />
+            That Feel <span className="text-foreground">Human</span>
             <br />
-            <span className="gradient-text">And Work Like Your Team</span>
+            <span className="gradient-text">and Work Like Your Team</span>
           </h1>
 
           <p className="text-lg text-muted-foreground max-w-lg mb-10 leading-relaxed">
@@ -139,12 +139,12 @@ const HeroSection = () => (
           <motion.div
             animate={{ y: [0, -8, 0] }}
             transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
-            className="absolute -top-6 -right-6 z-20 glass rounded-2xl p-4 glow-sm border border-white/10 hidden md:block"
+            className="absolute -top-8 -right-4 md:-top-6 md:-right-6 z-20 glass rounded-2xl p-3 md:p-4 glow-sm border border-white/10"
           >
             <div className="bg-white p-2 rounded-xl mb-2">
               <img
                 src={whatsappQrImage}
-                alt="Bluechilli WhatsApp QR code"
+                alt="Scan Bluechilli WhatsApp QR code to start a live AI chatbot conversation"
                 className="h-16 w-16 object-contain"
               />
             </div>
@@ -154,7 +154,11 @@ const HeroSection = () => (
           </motion.div>
 
           {/* Chat Preview */}
-          <div className="glass rounded-2xl p-6 glow-md mb-10 md:mt-0 max-w-2xl mx-auto lg:mx-0">
+          <div 
+            role="img"
+            aria-label="Interactive demo showing a Bluechilli AI chatbot handling a complex emergency repair request on WhatsApp"
+            className="glass rounded-2xl p-6 glow-md mb-10 md:mt-0 max-w-2xl mx-auto lg:mx-0"
+          >
             <div className="flex items-center gap-3 mb-6 pb-4 border-b border-border">
               <div className="h-10 w-10 rounded-full btn-gradient flex items-center justify-center text-sm font-bold">
                 AI

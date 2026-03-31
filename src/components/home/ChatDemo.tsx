@@ -36,7 +36,11 @@ const ChatDemo = () => {
         </AnimatedSection>
 
         <AnimatedSection className="max-w-lg mx-auto">
-          <div className="glass rounded-2xl p-6 glow-md">
+          <div 
+            role="img"
+            aria-label="Interactive demo showing a Bluechilli AI chatbot handling a restaurant reservation on WhatsApp"
+            className="glass rounded-2xl p-6 glow-md"
+          >
             <div className="flex items-center gap-3 mb-6 pb-4 border-b border-border">
               <div className="h-10 w-10 rounded-full btn-gradient flex items-center justify-center text-sm font-bold">
                 🤖

@@ -1,10 +1,21 @@
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
+import SEO from "../components/SEO";
+import BreadcrumbSchema from "../components/BreadcrumbSchema";
 import AnimatedSection from "../components/AnimatedSection";
 
 const TermsAndConditions = () => {
   return (
     <div className="min-h-screen bg-dark-deep">
+      <SEO 
+        title="Terms of Service | Bluechilli AI"
+        description="Review the Terms of Service for Bluechilli AI. Understand your rights and responsibilities when using our WhatsApp AI chatbot platform and bespoke services."
+        canonical="https://www.bluechilli.ai/terms"
+      />
+      <BreadcrumbSchema items={[
+        { name: "Home", item: "/" },
+        { name: "Terms and Conditions", item: "/terms" }
+      ]} />
       <Navbar />
       <section className="pt-24 pb-20">
         <div className="container mx-auto px-4 sm:px-6 max-w-4xl">

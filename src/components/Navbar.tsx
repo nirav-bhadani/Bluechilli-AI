@@ -96,7 +96,7 @@ const Navbar = () => {
               <span className="absolute -inset-2 rounded-xl bg-white/0 group-hover:bg-white/[0.04] transition-all duration-300" />
               <img
                 src={logo}
-                alt="Bluechilli AI"
+                alt="Bluechilli AI - WhatsApp AI Chatbots That Feel Human"
                 className="h-6 w-auto relative min-[992px]:h-8"
               />
             </Link>
@@ -215,7 +215,11 @@ const Navbar = () => {
               {/* top bar */}
               <div className="flex items-center justify-between mb-12">
                 <Link to="/" onClick={() => setMobileOpen(false)}>
-                  <img src={logo} alt="Bluechilli AI" className="h-8 w-auto" />
+                  <img
+                    src={logo}
+                    alt="Bluechilli AI - WhatsApp AI Chatbots That Feel Human"
+                    className="h-8 w-auto"
+                  />
                 </Link>
                 <button
                   onClick={() => setMobileOpen(false)}

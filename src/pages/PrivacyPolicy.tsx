@@ -1,10 +1,21 @@
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
+import SEO from "../components/SEO";
+import BreadcrumbSchema from "../components/BreadcrumbSchema";
 import AnimatedSection from "../components/AnimatedSection";
 
 const PrivacyPolicy = () => {
   return (
     <div className="min-h-screen bg-dark-deep">
+      <SEO 
+        title="Privacy Policy | Bluechilli AI"
+        description="Read the Bluechilli AI Privacy Policy. Learn how we collect, use, and protect your data and the information processed by our WhatsApp AI chatbot services."
+        canonical="https://www.bluechilli.ai/privacy-policy"
+      />
+      <BreadcrumbSchema items={[
+        { name: "Home", item: "/" },
+        { name: "Privacy Policy", item: "/privacy-policy" }
+      ]} />
       <Navbar />
       <section className="pt-24 pb-20">
         <div className="container mx-auto px-4 sm:px-6 max-w-4xl">
