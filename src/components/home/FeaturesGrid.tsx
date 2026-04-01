@@ -1,5 +1,6 @@
+import { Link } from "react-router-dom";
 import AnimatedSection from "../AnimatedSection";
-import { Brain, Workflow, Zap, MessageCircleMore } from "lucide-react";
+import { Brain, Workflow, Zap, MessageCircleMore, ArrowRight } from "lucide-react";
 
 const features = [
   {
@@ -11,7 +12,7 @@ const features = [
   {
     icon: Workflow,
     title: "Seamless Integration",
-    desc: "Connects effortlessly with CRMs, databases, APIs, and backend systems -- regardless of your tech stack.",
+    desc: "Connects effortlessly with CRMs, databases, APIs, and backend systems - regardless of your tech stack.",
     accent: "from-sky-500/30 to-cyan-500/20",
   },
   {
@@ -44,20 +45,22 @@ const FeaturesGrid = () => {
             Why Choose Bluechilli?
           </p>
           <h2 className="font-display text-3xl md:text-5xl font-bold mb-4 leading-tight">
-            Everything You Need to <span className="gradient-text">Automate</span>
+            Advanced WhatsApp AI <br />
+            <span className="gradient-text">Core Features</span>
           </h2>
           <p className="text-muted-foreground max-w-3xl mx-auto text-sm md:text-base">
-            Everything you need to deliver exceptional customer experiences through WhatsApp.
+            Everything you need to deliver exceptional customer experiences
+            through WhatsApp.
           </p>
         </AnimatedSection>
 
         <div className="grid sm:grid-cols-2 gap-6 max-w-6xl mx-auto">
           {features.map((feature, i) => (
             <AnimatedSection key={feature.title} delay={i * 0.07}>
-              <div
-                className="relative h-full rounded-2xl border border-white/10 bg-white/[0.03] backdrop-blur-xl p-6 md:p-7 overflow-hidden"
-              >
-                <div className={`absolute inset-x-0 top-0 h-1 bg-gradient-to-r ${feature.accent}`} />
+              <div className="relative h-full rounded-2xl border border-white/10 bg-white/[0.03] backdrop-blur-xl p-6 md:p-7 overflow-hidden">
+                <div
+                  className={`absolute inset-x-0 top-0 h-1 bg-gradient-to-r ${feature.accent}`}
+                />
                 <div className="absolute -right-16 -top-16 h-36 w-36 rounded-full bg-white/5 blur-3xl" />
 
                 <div className="feature-icon h-12 w-12 rounded-xl bg-white/[0.08] border border-white/15 flex items-center justify-center mb-5">
@@ -76,16 +79,31 @@ const FeaturesGrid = () => {
         </div>
 
         <AnimatedSection className="mt-10 md:mt-12">
-          <div className="max-w-6xl mx-auto relative rounded-2xl border border-white/10 bg-white/[0.03] backdrop-blur-xl px-6 py-10 md:px-12 md:py-12 overflow-hidden">
+          <div className="max-w-6xl mx-auto relative rounded-2xl border border-white/10 bg-white/[0.03] backdrop-blur-xl px-6 py-10 md:px-12 md:py-12 overflow-hidden text-center">
             <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[#E6007E]/60 to-transparent" />
-            <div className="absolute -top-10 -right-10 h-28 w-28 rounded-full bg-violet-500/20 blur-3xl pointer-events-none" />
-            <div className="absolute -bottom-10 -left-10 h-28 w-28 rounded-full bg-sky-500/15 blur-3xl pointer-events-none" />
-
-            <blockquote className="relative text-center">
+            
+            <blockquote className="relative mb-10">
               <p className="font-display text-xl md:text-3xl leading-relaxed text-white/95">
-                "Bluechilli completely transformed how we handle customer enquiries. Our response time went from hours to seconds, and our customers love it."
+                "Bluechilli completely transformed how we handle customer
+                enquiries. Our response time went from hours to seconds, and our
+                customers love it."
               </p>
             </blockquote>
+
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4">
+              <Link
+                to="/examples"
+                className="btn-gradient px-8 py-3.5 rounded-xl text-sm inline-flex items-center gap-2"
+              >
+                See Full Case Studies <ArrowRight size={16} />
+              </Link>
+              <Link
+                to="/how-it-works"
+                className="btn-glass px-8 py-3.5 rounded-xl text-sm"
+              >
+                Learn about our process
+              </Link>
+            </div>
           </div>
         </AnimatedSection>
       </div>

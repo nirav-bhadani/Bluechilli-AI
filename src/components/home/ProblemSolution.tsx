@@ -18,8 +18,8 @@ const ProblemSolution = () => (
     <div className="container mx-auto px-6">
       <AnimatedSection className="text-center mb-16">
         <h2 className="font-display text-3xl md:text-5xl font-bold mb-4">
-          From <span className="text-neon-pink">Problems</span> to{" "}
-          <span className="gradient-text">Solutions</span>
+          Overcome Business Challenges with <br />
+          <span className="gradient-text">WhatsApp AI Automation</span>
         </h2>
         <p className="text-muted-foreground max-w-2xl mx-auto">
           See how Bluechilli AI transforms your customer communication

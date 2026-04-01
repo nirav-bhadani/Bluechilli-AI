@@ -6,7 +6,12 @@ const WHATSAPP_LINK =
 
 /* WhatsApp SVG icon so we don't need an extra dep */
 const WAIcon = () => (
-  <svg viewBox="0 0 32 32" fill="none" className="h-7 w-7" xmlns="http://www.w3.org/2000/svg">
+  <svg
+    viewBox="0 0 32 32"
+    fill="none"
+    className="h-7 w-7"
+    xmlns="http://www.w3.org/2000/svg"
+  >
     <path
       d="M16 2C8.268 2 2 8.268 2 16c0 2.47.65 4.787 1.787 6.793L2 30l7.438-1.762A13.935 13.935 0 0016 30c7.732 0 14-6.268 14-14S23.732 2 16 2z"
       fill="#25D366"
@@ -31,7 +36,10 @@ const FloatingWhatsAppButton = () => {
   /* close when clicking outside */
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
-      if (containerRef.current && !containerRef.current.contains(e.target as Node)) {
+      if (
+        containerRef.current &&
+        !containerRef.current.contains(e.target as Node)
+      ) {
         setOpen(false);
       }
     };
@@ -43,8 +51,10 @@ const FloatingWhatsAppButton = () => {
   }, [open]);
 
   return (
-    <div ref={containerRef} className="fixed bottom-4 left-2 right-2 z-[100] md:bottom-8 md:right-8 md:left-auto flex flex-col items-end gap-3 pointer-events-none">
-
+    <div
+      ref={containerRef}
+      className="fixed bottom-4 left-2 right-2 z-[100] md:bottom-8 md:right-8 md:left-auto flex flex-col items-end gap-3 pointer-events-none"
+    >
       {/* ── popup card ── */}
       <div
         className={`transition-all duration-500 ${
@@ -54,12 +64,17 @@ const FloatingWhatsAppButton = () => {
         }`}
       >
         <div className="relative w-full max-w-[320px] rounded-2xl overflow-hidden shadow-[0_24px_64px_rgba(0,0,0,0.55)] border border-white/10 backdrop-blur-md bg-[#111827]/95 ml-auto">
-
           {/* header */}
           <div className="relative bg-gradient-to-br from-emerald-600 to-green-500 px-5 py-4 flex items-center gap-3">
             {/* decorative blobs */}
-            <span className="absolute -top-4 -right-4 h-20 w-20 rounded-full bg-white/10 blur-xl" aria-hidden="true" />
-            <span className="absolute bottom-0 left-0 h-14 w-14 rounded-full bg-black/10 blur-lg" aria-hidden="true" />
+            <span
+              className="absolute -top-4 -right-4 h-20 w-20 rounded-full bg-white/10 blur-xl"
+              aria-hidden="true"
+            />
+            <span
+              className="absolute bottom-0 left-0 h-14 w-14 rounded-full bg-black/10 blur-lg"
+              aria-hidden="true"
+            />
 
             {/* avatar */}
             <div className="relative shrink-0">
@@ -70,7 +85,9 @@ const FloatingWhatsAppButton = () => {
             </div>
 
             <div className="relative flex-1">
-              <p className="font-semibold text-white text-sm leading-tight">Blu — AI Assistant</p>
+              <p className="font-semibold text-white text-sm leading-tight">
+                Blu — AI Assistant
+              </p>
               <p className="text-emerald-100 text-xs mt-0.5 flex items-center gap-1">
                 <span className="inline-block h-1.5 w-1.5 rounded-full bg-[#00ff7f] animate-pulse" />
                 Online · typically replies instantly
@@ -95,9 +112,12 @@ const FloatingWhatsAppButton = () => {
               </div>
               <div className="relative bg-white/10 rounded-2xl rounded-tl-none px-4 py-3 text-sm text-white/90 leading-relaxed shadow">
                 <span className="absolute -left-1.5 top-0 h-0 w-0 border-t-[10px] border-t-white/10 border-l-[10px] border-l-transparent" />
-                👋 Hi there! I'm <strong>Blu</strong>, Bluechilli's AI sales assistant.
-                <br /><br />
-                Got questions about how we can automate your customer chats? I'm here 24/7!
+                👋 Hi there! I'm <strong>Blu</strong>, Bluechilli's AI sales
+                assistant.
+                <br />
+                <br />
+                Got questions about how we can automate your customer chats? I'm
+                here 24/7!
               </div>
             </div>
 
@@ -140,8 +160,14 @@ const FloatingWhatsAppButton = () => {
         }`}
       >
         {/* ping rings */}
-        <span className="absolute inset-0 rounded-full bg-emerald-400/30 animate-ping" aria-hidden="true" />
-        <span className="absolute inset-0 rounded-full bg-emerald-400/20 blur-md animate-pulse" aria-hidden="true" />
+        <span
+          className="absolute inset-0 rounded-full bg-emerald-400/30 animate-ping"
+          aria-hidden="true"
+        />
+        <span
+          className="absolute inset-0 rounded-full bg-emerald-400/20 blur-md animate-pulse"
+          aria-hidden="true"
+        />
         <span className="relative">
           <WAIcon />
         </span>

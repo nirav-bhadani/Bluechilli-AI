@@ -1,9 +1,12 @@
 import { useMemo, useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { ChevronDown, MessageCircle, ShieldCheck, Server, Database, Mail, Phone } from "lucide-react";
+import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
+import { ChevronDown, MessageCircle, ShieldCheck, Server, Database, Mail, Phone, ArrowRight } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
+import SEO from "../components/SEO";
+import BreadcrumbSchema from "../components/BreadcrumbSchema";
 import AnimatedSection from "../components/AnimatedSection";
 
 type FAQItem = {
@@ -143,6 +146,31 @@ const FAQ = () => {
 
   return (
     <div className="min-h-screen bg-dark-deep overflow-x-hidden">
+      <SEO 
+        title="WhatsApp AI Chatbot FAQ | Common Questions | Bluechilli AI"
+        description="Got questions about WhatsApp AI chatbots? Find answers on setup time, costs, integrations, security, and how Bluechilli’s AI handles customer conversations."
+        canonical="https://www.bluechilli.ai/faq"
+      />
+      <script type="application/ld+json">
+        {JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          "mainEntity": faqCategories.flatMap(category => 
+            category.items.map(faq => ({
+              "@type": "Question",
+              "name": faq.q,
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": faq.a
+              }
+            }))
+          )
+        })}
+      </script>
+      <BreadcrumbSchema items={[
+        { name: "Home", item: "/" },
+        { name: "FAQ", item: "/faq" }
+      ]} />
       <Navbar />
       <main className="relative pt-28 md:pt-32 pb-24">
         <div className="pointer-events-none absolute -top-24 -left-20 h-80 w-80 rounded-full bg-neon-blue/15 blur-3xl" />
@@ -151,8 +179,8 @@ const FAQ = () => {
         <section className="container mx-auto px-4 sm:px-6 relative max-w-full lg:max-w-7xl">
           <AnimatedSection className="text-center mb-12 md:mb-16">
             <h1 className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-[1.3] mb-6">
-              Frequently Asked <br />
-              <span className="gradient-text block leading-[1.4]">Questions</span>
+              WhatsApp AI Chatbot: <br />
+              <span className="gradient-text block leading-[1.4]">Frequently Asked Questions</span>
             </h1>
             <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed">
               Everything you need to know about our WhatsApp AI chatbots, setup,
@@ -180,6 +208,11 @@ const FAQ = () => {
                     onClick={() => {
                       setActiveCategory(category.id);
                       setOpen(null);
+                      if (window.innerWidth < 1024) {
+                        document
+                          .getElementById("faq-content")
+                          ?.scrollIntoView({ behavior: "smooth" });
+                      }
                     }}
                     initial={{ opacity: 0, y: 16 }}
                     whileInView={{ opacity: 1, y: 0 }}
@@ -273,11 +306,12 @@ const FAQ = () => {
           {/* Active Category FAQs */}
           {activeData && (
             <motion.div
+              id="faq-content"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5 }}
-              className="space-y-3 md:space-y-4"
+              className="space-y-3 md:space-y-4 scroll-mt-24"
             >
               <div className="flex items-center gap-3 mb-6 md:mb-8">
                 <div
@@ -339,25 +373,24 @@ const FAQ = () => {
                         />
                       </button>
 
-                      <AnimatePresence initial={false}>
-                        {isOpen && (
-                          <motion.div
-                            initial={{ height: 0, opacity: 0 }}
-                            animate={{ height: "auto", opacity: 1 }}
-                            exit={{ height: 0, opacity: 0 }}
-                            transition={{ duration: 0.24 }}
-                          >
-                            <p
-                              className="relative z-10 px-5 md:px-6 pb-5 md:pb-6 pt-5 md:pt-6 text-white/68 leading-relaxed border-t"
-                              style={{
-                                borderColor: `${activeData.color}2b`,
-                              }}
-                            >
-                              {faq.a}
-                            </p>
-                          </motion.div>
-                        )}
-                      </AnimatePresence>
+                      <motion.div
+                        initial={false}
+                        animate={{ 
+                          height: isOpen ? "auto" : 0,
+                          opacity: isOpen ? 1 : 0
+                        }}
+                        transition={{ duration: 0.3, ease: "easeInOut" }}
+                        className="overflow-hidden"
+                      >
+                        <p
+                          className="relative z-10 px-5 md:px-6 pb-5 md:pb-6 pt-5 md:pt-6 text-white/68 leading-relaxed border-t"
+                          style={{
+                            borderColor: `${activeData.color}2b`,
+                          }}
+                        >
+                          {faq.a}
+                        </p>
+                      </motion.div>
                     </motion.div>
                   );
                 })}
@@ -365,6 +398,24 @@ const FAQ = () => {
 
             </motion.div>
           )}
+        </section>
+
+        {/* FAQ - Final CTA */}
+        <section className="container mx-auto px-4 mt-20 text-center">
+          <AnimatedSection>
+            <div className="glass rounded-3xl p-8 md:p-12 max-w-4xl mx-auto border-white/10 bg-gradient-to-br from-white/[0.05] to-transparent">
+              <h2 className="font-display text-3xl font-bold mb-4">Still have questions?</h2>
+              <p className="text-white/60 mb-8">
+                Our team is ready to help you with any specific technical requirements or model questions.
+              </p>
+              <Link 
+                to="/contact"
+                className="btn-gradient px-8 py-4 rounded-xl font-semibold inline-flex items-center gap-2"
+              >
+                Talk to an Expert <ArrowRight size={20} />
+              </Link>
+            </div>
+          </AnimatedSection>
         </section>
       </main>
       <Footer />

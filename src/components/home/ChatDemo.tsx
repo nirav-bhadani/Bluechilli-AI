@@ -1,5 +1,5 @@
-import { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { useState, useEffect, useRef } from "react";
+import { motion, AnimatePresence, useInView } from "framer-motion";
 import AnimatedSection from "../AnimatedSection";
 
 const conversation = [
@@ -13,18 +13,18 @@ const conversation = [
 
 const ChatDemo = () => {
   const [visibleCount, setVisibleCount] = useState(0);
+  const containerRef = useRef(null);
+  const isInView = useInView(containerRef, { once: true, margin: "-100px" });
 
   useEffect(() => {
-    if (visibleCount < conversation.length) {
+    if (isInView && visibleCount < conversation.length) {
       const timer = setTimeout(() => setVisibleCount((c) => c + 1), 1200);
       return () => clearTimeout(timer);
     }
-    const reset = setTimeout(() => setVisibleCount(0), 4000);
-    return () => clearTimeout(reset);
-  }, [visibleCount]);
+  }, [visibleCount, isInView]);
 
   return (
-    <section className="section-spacing">
+    <section className="section-spacing" ref={containerRef}>
       <div className="container mx-auto px-6">
         <AnimatedSection className="text-center mb-16">
           <h2 className="font-display text-3xl md:text-5xl font-bold mb-4">
@@ -36,7 +36,11 @@ const ChatDemo = () => {
         </AnimatedSection>
 
         <AnimatedSection className="max-w-lg mx-auto">
-          <div className="glass rounded-2xl p-6 glow-md">
+          <div 
+            role="img"
+            aria-label="Interactive demo showing a Bluechilli AI chatbot handling a restaurant reservation on WhatsApp"
+            className="glass rounded-2xl p-6 glow-md"
+          >
             <div className="flex items-center gap-3 mb-6 pb-4 border-b border-border">
               <div className="h-10 w-10 rounded-full btn-gradient flex items-center justify-center text-sm font-bold">
                 🤖
